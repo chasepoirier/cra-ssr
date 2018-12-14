@@ -8,7 +8,16 @@
     "rules": {
         "comma-dangle": "off",
         "semi": "off",
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ]
     },
     "parserOptions": {
         "ecmaVersion": 2017,
@@ -16,6 +25,7 @@
             "spread": true
         }
     },
+    "parser": "babel-eslint",
     "settings": {
         "import/resolver": {
             "node": {

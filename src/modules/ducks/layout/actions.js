@@ -1,6 +1,12 @@
 import * as types from './types'
 
 export const Actions = {
-  toggleContactForm: toggle => (types.TOGGLE_CONTACT_FORM, { toggle }),
-  toggleMobileNav: toggle => (types.TOGGLE_MOBILE_MENU, { toggle })
+  toggleContactForm: toggle => ({
+    type: types.TOGGLE_CONTACT_FORM,
+    payload: { toggle }
+  }),
+  toggleMobileNav: toggle => ({
+    type: types.TOGGLE_MOBILE_MENU,
+    payload: { toggle }
+  })
 }

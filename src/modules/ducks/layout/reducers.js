@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import * as fromActions from './actions'
 import * as types from './types'
 
 const initialState = {

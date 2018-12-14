@@ -15,9 +15,9 @@ const App = () => (
     <div className="page-wrapper">
       <Navbar.default />
       <Switch>
-        {/* <Route exact={true} path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
-        <Route component={NotFound} /> */}
+        <Route component={NotFound} />
       </Switch>
     </div>
   </div>
