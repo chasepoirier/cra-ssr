@@ -7,17 +7,21 @@ import { ConnectedRouter } from 'connected-react-router';
 import createStore from './store';
 
 import App from './app/app';
-import './index.css';
+
+// import './index.css'
 
 // Create a store and get back itself and its history object
 const { store, history } = createStore();
 
-// Running locally, we should run on a <ConnectedRouter /> rather than on a <StaticRouter /> like on the server
+// Running locally, we should run on a <ConnectedRouter />
+// rather than on a <StaticRouter /> like on the server
 // Let's also let React Frontload explicitly know we're not rendering on the server here
+
+/* eslint-disable react/jsx-filename-extension */
 const Application = (
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Frontload noServerRender={true}>
+      <Frontload noServerRender>
         <App />
       </Frontload>
     </ConnectedRouter>

@@ -1,0 +1,6 @@
+src/*.css
+package.json
+package-lock.json
+public/manifest.json
+.eslintrc.json
+README.md

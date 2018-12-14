@@ -1,37 +1,26 @@
 // The basics
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { withRouter } from 'react-router'
+import React from 'react'
+import { Switch, Route } from 'react-router'
 
-// Action creators and helpers
-import { establishCurrentUser } from '../modules/auth'
-import { isServer } from '../store'
+// Pages
+import Home from './views/Home'
+import NotFound from './views/404'
+import About from './views/About'
 
-import Header from './header'
-import Routes from './routes'
+// Components
+import * as Navbar from './components/Navbar'
 
-import './app.css'
-
-const App = ({ isAuthenticated, location }) => (
+const App = () => (
   <div id="app">
-    <Header isAuthenticated={isAuthenticated} current={location.pathname} />
-    <div id="content">
-      <Routes />
+    <div className="page-wrapper">
+      <Navbar.default />
+      <Switch>
+        {/* <Route exact={true} path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route component={NotFound} /> */}
+      </Switch>
     </div>
   </div>
 )
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
-})
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ establishCurrentUser }, dispatch)
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-)
+export default App

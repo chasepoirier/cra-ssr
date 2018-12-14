@@ -1,0 +1,28 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "jasmine": true
+    },
+    "extends": ["airbnb", "prettier"],
+    "rules": {
+        "comma-dangle": "off",
+        "semi": "off",
+        "import/prefer-default-export": "off"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2017,
+        "ecmaFeatures": {
+            "spread": true
+        }
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "paths": [
+                    "src"
+                ]
+            }
+        }
+    }
+}

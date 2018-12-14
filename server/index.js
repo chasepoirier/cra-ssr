@@ -31,9 +31,9 @@ require('@babel/polyfill')
 require('@babel/register')({
   ignore: [/\/(build|node_modules)\//],
   presets: [
-    '@babel/preset-typescript',
     '@babel/preset-env',
-    '@babel/preset-react'
+    '@babel/preset-react',
+    '@babel/preset-typescript'
   ],
   plugins: [
     '@babel/plugin-syntax-dynamic-import',

@@ -1,0 +1,26 @@
+.page.not-found {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.page.not-found .content-container {
+  width: 95%;
+  max-width: 600px;
+}
+
+.page.not-found h1,
+.page.not-found h3 {
+  width: 100%;
+  /*text-align: center;*/
+  margin: 0;
+  padding: 0;
+}
+
+.page.not-found h3 {
+  margin: 6px 0 20px;
+}
