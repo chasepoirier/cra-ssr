@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // Express requirements
 import path from 'path'
 import fs from 'fs'
@@ -15,6 +17,9 @@ import Loadable from 'react-loadable'
 import createStore from '../src/store'
 import App from '../src/app/app'
 import manifest from '../build/asset-manifest.json'
+
+import { fetchAllPostsSuccess } from '../src/modules/ducks/posts/operations'
+import api from '../src/modules/api'
 
 // LOADER
 export default (req, res) => {
@@ -42,7 +47,7 @@ export default (req, res) => {
   fs.readFile(
     path.resolve(__dirname, '../build/index.html'),
     'utf8',
-    (err, htmlData) => {
+    async (err, htmlData) => {
       // If there's an error... serve up something nasty
       if (err) {
         console.error('Read error', err)
@@ -54,20 +59,9 @@ export default (req, res) => {
       const { store } = createStore(req.url)
 
       // ASYNC REDUX ACTIONS CAN GO HERE
-      /**
-       * Example:
-       *  if(hasData) {
-       *    store.dispatch(addData(hasData))
-       *  } else {
-       *    const data = await api.getData()
-       *    store.dispatch(addData(data))
-       *  }
-       */
-      // if ("mywebsite" in req.cookies) {
-      //   store.dispatch(setCurrentUser(req.cookies.mywebsite));
-      // } else {
-      //   store.dispatch(logoutUser());
-      // }
+
+      const posts = await api.wp.getAllPosts()
+      store.dispatch(fetchAllPostsSuccess(posts))
 
       const context = {}
       const modules = []

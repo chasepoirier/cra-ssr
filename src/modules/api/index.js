@@ -1,7 +1,7 @@
-import MailEndpoints from "./Mail";
+import wpApiEndpoints from './WP_API'
 
 const api = {
-  mail: MailEndpoints
-};
+  wp: wpApiEndpoints
+}
 
-export default api;
+export default api
