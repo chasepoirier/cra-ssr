@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import * as React from 'react'
 import { connect } from 'react-redux'
 import Helmet from 'react-helmet'
@@ -8,6 +9,15 @@ import { fetchAllPosts } from '../../../modules/ducks/posts/operations'
 // import './home.css'
 
 class Home extends React.Component {
+  static propTypes = {
+    fetchPosts: PropTypes.func.isRequired,
+    posts: PropTypes.arrayOf(
+      PropTypes.objectOf(
+        PropTypes.oneOfType(PropTypes.number, PropTypes.string)
+      )
+    ).isRequired
+  }
+
   componentDidMount() {
     const { fetchPosts, posts } = this.props
     if (posts.data.length === 0) {
