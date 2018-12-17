@@ -16,13 +16,6 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-typescript": "^7.1.0",
     "@babel/register": "^7.0.0",
-    "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.15",
-    "@types/react": "^16.7.17",
-    "@types/react-dom": "^16.0.11",
-    "@types/react-helmet": "^5.0.7",
-    "@types/react-redux": "^6.0.11",
-    "@types/react-router-dom": "^4.3.1",
     "axios": "^0.18.0",
     "babel-plugin-dynamic-import-node": "^2.1.0",
     "body-parser": "^1.18.3",
@@ -30,11 +23,6 @@
     "connected-react-router": "^4.5.0",
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.2.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
     "express": "^4.16.4",
     "forcedomain": "^1.0.0",
     "history": "^4.7.2",
@@ -67,8 +55,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "serve": "cross-env NODE_ENV=production node ./server/index.js",
-    "compile": "./node_modules/.bin/babel -d ./dist ./src -s --copy-files --extensions '.ts','.tsx','.js'",
-    "postinstall": "npm run build && npm run compile"
+    "clean": "rm -rf ./dist",
+    "compile": "npm run clean && ./node_modules/.bin/babel -d ./dist ./src -s --copy-files --extensions '.ts','.tsx','.js'",
+    "postinstall": "npm run build && npm run clean && npm run compile"
   },
   "browserslist": [
     ">0.2%",
@@ -80,5 +69,19 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.15",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-helmet": "^5.0.7",
+    "@types/react-redux": "^6.0.11",
+    "@types/react-router-dom": "^4.3.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1"
   }
 }

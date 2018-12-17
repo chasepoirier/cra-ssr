@@ -14,12 +14,12 @@ import { Frontload, frontloadServerRender } from 'react-frontload'
 import Loadable from 'react-loadable'
 
 // Our store, entrypoint, and manifest
-import createStore from '../dist/store'
-import App from '../dist/app/app'
+import createStore from '../dist/modules/store'
+import App from '../dist/App'
 import manifest from '../build/asset-manifest.json'
 
-import { fetchAllPostsSuccess } from '../src/modules/ducks/posts/operations'
-import api from '../src/modules/api'
+import { fetchAllPostsSuccess } from '../dist/modules/ducks/posts/operations'
+import api from '../dist/modules/api'
 
 // LOADER
 export default (req, res) => {
