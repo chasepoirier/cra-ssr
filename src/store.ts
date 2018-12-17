@@ -25,7 +25,7 @@ export default (url = '/') => {
   if (process.env.NODE_ENV === 'development' && !isServer) {
     const { __REDUX_DEVTOOLS_EXTENSION__ } = window
 
-    if (typeof devToolsExtension === 'function') {
+    if (typeof __REDUX_DEVTOOLS_EXTENSION__ === 'function') {
       enhancers.push(__REDUX_DEVTOOLS_EXTENSION__())
     }
   }

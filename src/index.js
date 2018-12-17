@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import Loadable from 'react-loadable'
 import { Frontload } from 'react-frontload'
 import { ConnectedRouter } from 'connected-react-router'
-import createStore from './store'
+import createStore from './store.ts'
 
-import App from './app/app'
+import App from './app/App.tsx'
 
 import './index.css'
 

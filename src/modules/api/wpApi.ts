@@ -5,7 +5,7 @@ const wpApiEndpoints = {
   getAllPosts: async () => {
     try {
       const result = await axios.get(`${wpApiBase}/posts`)
-      return result.data
+      return result.data as WPPost[]
     } catch (error) {
       throw error.response.data
     }

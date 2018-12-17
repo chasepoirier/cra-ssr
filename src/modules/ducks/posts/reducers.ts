@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux'
 import * as types from './types'
+import * as fromActions from './actions'
 
-const initialState = {
+const initialState: types.PostState = {
   allPosts: {
     error: null,
     loading: true,
@@ -9,7 +10,10 @@ const initialState = {
   }
 }
 
-const allPosts = (state = initialState.allPosts, action) => {
+const allPosts = (
+  state: types.PostState['allPosts'] = initialState.allPosts,
+  action: fromActions.Actions
+) => {
   switch (action.type) {
     case types.FETCH_ALL_POSTS_REQUEST:
       return { error: null, loading: true, data: [] }

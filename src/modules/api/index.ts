@@ -1,4 +1,4 @@
-import wpApiEndpoints from './WP_API'
+import wpApiEndpoints from './wpApi'
 
 const api = {
   wp: wpApiEndpoints
