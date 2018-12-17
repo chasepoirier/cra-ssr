@@ -4,9 +4,9 @@ import { Provider } from 'react-redux'
 import Loadable from 'react-loadable'
 import { Frontload } from 'react-frontload'
 import { ConnectedRouter } from 'connected-react-router'
-import createStore from './store.ts'
+import createStore from './store'
 
-import App from './app/App.tsx'
+import App from './App'
 
 import './index.css'
 
@@ -30,7 +30,7 @@ const Application = (
 
 const root = document.querySelector('#root')
 
-if (root.hasChildNodes() === true) {
+if (root && root.hasChildNodes() === true) {
   // If it's an SSR, we use hydrate to get fast page loads by just
   // attaching event listeners after the initial render
   Loadable.preloadReady().then(() => {
