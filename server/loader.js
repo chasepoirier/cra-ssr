@@ -14,8 +14,8 @@ import { Frontload, frontloadServerRender } from 'react-frontload'
 import Loadable from 'react-loadable'
 
 // Our store, entrypoint, and manifest
-import createStore from '../src/store'
-import App from '../src/app/app'
+import createStore from '../dist/store'
+import App from '../dist/app/app'
 import manifest from '../build/asset-manifest.json'
 
 import { fetchAllPostsSuccess } from '../src/modules/ducks/posts/operations'
