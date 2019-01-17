@@ -13,10 +13,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "cross-env NODE_ENV=production node ./server/index.js",
-    "clean": "rm -rf ./dist",
-    "compile": "yarn clean && ./node_modules/.bin/babel -d ./dist ./src -s --copy-files --extensions '.ts','.tsx','.js'",
-    "postinstall": "yarn build && yarn clean && yarn compile"
+    "serve": "cross-env NODE_ENV=production node ./dist_server/index.js",
+    "server": "yarn compile-server && cross-env NODE_ENV=development nodemon ./dist_server/",
+    "dev": "concurrently --kill-others \"yarn start\" \"yarn server\"",
+    "compile-server": "rm -rf ./dist && ./node_modules/.bin/babel -d ./dist_server ./server -s --copy-files --extensions '.ts','.tsx','.js'",
+    "compile-client": "rm -rf ./dist && ./node_modules/.bin/babel -d ./dist_client ./src -s --copy-files --extensions '.ts','.tsx','.js'",
+    "compile": "yarn compile-server && yarn compile-client && yarn build",
+    "postinstall": "yarn compile"
   },
   "browserslist": [
     ">0.2%",
@@ -29,6 +32,7 @@
       "pre-commit": "pretty-quick --staged"
     }
   },
+  "proxy": "http://localhost:8080/",
   "dependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.1.2",
@@ -76,17 +80,18 @@
     "typescript": "^3.2.2"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/compression": "^0.0.36",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.0",
     "@types/jest": "^23.3.10",
+    "@types/morgan": "^1.7.35",
     "@types/node": "^10.12.15",
     "@types/react": "^16.7.17",
     "@types/react-dom": "^16.0.11",
     "@types/react-helmet": "^5.0.7",
     "@types/react-redux": "^6.0.11",
     "@types/react-router-dom": "^4.3.1",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1"
+    "concurrently": "^4.1.0"
   }
 }

@@ -1,0 +1,7 @@
+{
+  "watch": ["server"],
+  "events": {
+    "restart": "yarn compile-server"
+  },
+  "ext": "js, tsx, json, ts, jsx"
+}

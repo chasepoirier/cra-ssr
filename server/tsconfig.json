@@ -7,7 +7,6 @@
     "allowJs": true,
     "jsx": "preserve",
     "moduleResolution": "node",
-    "rootDir": "src",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
@@ -21,19 +20,6 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "resolveJsonModule": true,
-    "noEmit": true,
-    "isolatedModules": true
-  },
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "dist_client",
-    "dist_server"
-  ],
-  "include": ["src"]
+    "noEmit": true
+  }
 }

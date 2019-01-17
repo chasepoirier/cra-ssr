@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // Express requirements
 import path from 'path'
 import fs from 'fs'
@@ -14,15 +12,23 @@ import { Frontload, frontloadServerRender } from 'react-frontload'
 import Loadable from 'react-loadable'
 
 // Our store, entrypoint, and manifest
-import createStore from '../dist/modules/store'
-import App from '../dist/App'
+import createStore from '../dist_client/modules/store'
+import App from '../dist_client/App'
+import { fetchAllPostsSuccess } from '../dist_client/modules/ducks/posts/operations'
+import api from '../dist_client/modules/api'
 import manifest from '../build/asset-manifest.json'
 
-import { fetchAllPostsSuccess } from '../dist/modules/ducks/posts/operations'
-import api from '../dist/modules/api'
+interface Props {
+  html: any
+  title: any
+  meta: any
+  body: any
+  scripts: any
+  state: any
+}
 
 // LOADER
-export default (req, res) => {
+export default (req: any, res: any) => {
   /*
     A simple helper function to prepare the HTML markup. This loads:
       - Page title
@@ -30,7 +36,10 @@ export default (req, res) => {
       - Preloaded state (for Redux) depending on the current route
       - Code-split script tags depending on the current route
   */
-  const injectHTML = (data, { html, title, meta, body, scripts, state }) => {
+  const injectHTML = (
+    data: any,
+    { html, title, meta, body, scripts, state }: Props
+  ) => {
     data = data.replace('<html>', `<html ${html}>`)
     data = data.replace(/<title>.*?<\/title>/g, title)
     data = data.replace('</head>', `${meta}</head>`)
@@ -56,16 +65,17 @@ export default (req, res) => {
       }
 
       // Create a store (with a memory history) from our current url
-      const { store } = createStore(req.url)
+      let store: any
+      if (createStore && api && fetchAllPostsSuccess) {
+        store = createStore(req.url).store
 
-      // ASYNC REDUX ACTIONS CAN GO HERE
+        // ASYNC REDUX ACTIONS CAN GO HERE
+        const posts = await api.wp.getAllPosts()
+        store.dispatch(fetchAllPostsSuccess(posts))
+      }
 
-      const posts = await api.wp.getAllPosts()
-      store.dispatch(fetchAllPostsSuccess(posts))
-
-      const context = {}
-      const modules = []
-
+      const context: any = {}
+      const modules: any = []
       /*
         Here's the core funtionality of this file. We do the following in specific order (inside-out):
           1. Load the <App /> component
@@ -80,19 +90,21 @@ export default (req, res) => {
         data for that page. We take all that information and compute the appropriate state to send to the user. This is
         then loaded into the correct components and sent as a Promise to be handled below.
       */
+
+      let ConvertedApp: any = App
       frontloadServerRender(() =>
         renderToString(
-          <Loadable.Capture report={m => modules.push(m)}>
+          <Loadable.Capture report={(m: any) => modules.push(m)}>
             <Provider store={store}>
               <StaticRouter location={req.url} context={context}>
                 <Frontload isServer={true}>
-                  <App />
+                  <ConvertedApp />
                 </Frontload>
               </StaticRouter>
             </Provider>
           </Loadable.Capture>
         )
-      ).then(routeMarkup => {
+      ).then((routeMarkup: any) => {
         if (context.url) {
           // If context has a url property, then we need to handle a redirection in Redux Router
           res.writeHead(302, {
@@ -104,7 +116,7 @@ export default (req, res) => {
           // Otherwise, we carry on...
 
           // Let's give ourself a function to load all our page-specific JS assets for code splitting
-          const extractAssets = (assets, chunks) =>
+          const extractAssets = (assets: any, chunks: any) =>
             Object.keys(assets)
               .filter(asset => chunks.indexOf(asset.replace('.js', '')) > -1)
               .map(k => assets[k])
@@ -120,10 +132,6 @@ export default (req, res) => {
 
           // We need to tell Helmet to compute the right meta tags, title, and such
           const helmet = Helmet.renderStatic()
-
-          // NOTE: Disable if you desire
-          // Let's output the title, just to see SSR is working as intended
-          console.log('THE TITLE', helmet.title.toString())
 
           // Pass all this nonsense into our HTML formatting function above
           const html = injectHTML(htmlData, {
